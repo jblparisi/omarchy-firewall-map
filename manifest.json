@@ -1,0 +1,74 @@
+{
+  "schemaVersion": 1,
+  "id": "jblparisi.firewall-map",
+  "name": "Firewall Map+",
+  "version": "1.5.0",
+  "author": "J. Parisi",
+  "license": "MIT",
+  "description": "Live OPNsense Firewall Map+ traffic, blocked sources and threat hosts in the Omarchy bar, with a movable world map and host block controls.",
+  "kinds": [
+    "service",
+    "bar-widget"
+  ],
+  "keepLoaded": false,
+  "entryPoints": {
+    "service": "Service.qml",
+    "barWidget": "BarWidget.qml"
+  },
+  "barWidget": {
+    "displayName": "Firewall Map+",
+    "description": "Live OPNsense world map of flows and blocked sources",
+    "category": "Network",
+    "aliases": [
+      "firewall",
+      "opnsense",
+      "map",
+      "flows",
+      "security"
+    ],
+    "allowMultiple": false,
+    "defaultSection": "right",
+    "defaults": {
+      "url": "https://192.168.1.1",
+      "interval": 1,
+      "blocksMin": 2,
+      "showHostnames": true
+    },
+    "schema": [
+      {
+        "key": "url",
+        "type": "string",
+        "label": "OPNsense address",
+        "defaultValue": "https://192.168.1.1",
+        "description": "Base URL of the OPNsense GUI, without a trailing slash."
+      },
+      {
+        "key": "interval",
+        "type": "integer",
+        "label": "Refresh interval (seconds)",
+        "min": 1,
+        "max": 30,
+        "step": 1,
+        "defaultValue": 1,
+        "description": "Poll the current firewall summary every second; collector samples are normally two seconds apart."
+      },
+      {
+        "key": "blocksMin",
+        "type": "integer",
+        "label": "Minimum block hits to show",
+        "min": 1,
+        "max": 100,
+        "step": 1,
+        "defaultValue": 2,
+        "description": "Passed to Firewall Map+ as blocks_min."
+      },
+      {
+        "key": "showHostnames",
+        "type": "boolean",
+        "label": "Resolve hostnames",
+        "defaultValue": true,
+        "description": "Use the firewall's reverse DNS cache for host labels; IP addresses remain available."
+      }
+    ]
+  }
+}
